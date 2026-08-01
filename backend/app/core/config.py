@@ -4,6 +4,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 """
+BaseSettings -> Instead of manually using os.getenv() automatically reads, parses, and validates matching environment variables or entries from a .env file at runtime
+
 Takes .env URL's & gets converted into 
 
 settings.database_url
@@ -19,7 +21,7 @@ class Settings(BaseSettings):
     test_database_url: str 
     redis_url: str
 
-@lru_cache #a cache for retrieving settings so doesn't have to be recalled hundreds of times
+@lru_cache # Helper for Settings() a cache for retrieving settings so doesn't have to be recalled hundreds of times
 def get_settings() -> Settings:
     return Settings()
 
