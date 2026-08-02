@@ -7,7 +7,7 @@ from alembic import context #This is Alembic's control object its what gives it 
 from sqlalchemy import engine_from_config, pool 
 
 from app.db.base import Base
-from app.db import models
+from app.db import models # SQLAlchemy builds metadata when models are imported.
 
 
 config = context.config
