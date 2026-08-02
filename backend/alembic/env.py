@@ -1,5 +1,5 @@
 #alembic/env.py tells Alembic how to connect to your database and which SQLAlchemy models it should watch when creating migrations.
-
+#Alembic is a tracked set of instructions that safely updates a relational database's schema (e.g., adding tables, columns, or constraints) over time
 import os 
 from logging.config import fileConfig # Loads Alembic's logging configuration -> Make Alembic output logs properly
 
