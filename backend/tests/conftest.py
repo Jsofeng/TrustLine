@@ -30,4 +30,23 @@ async def db() -> AsyncSession:
         await session.rollback() #rolled back to guarantee no database changes persist.
     await engine.dispose() #This shuts down the engine's connection pool.
 
+#ensures removal of old tables after every test
+@pytest.fixture
+async def clean_db(db: AsyncSession) -> AsyncSession:
+    """Remove test rows without creating schema in the application database."""
+    for table in (
+        "human_overrides",
+        "review_cases",
+        "agent_decisions",
+        "decision_trace_events",
+        "evidence_snapshots",
+        "investigation_runs",
+        "disputes",
+        "device_events",
+        "transactions",
+        "accounts",
+    ):
+        await db.execute(text(f"DELETE FROM {table}")) # Tells SQLAlchemy to Treat this as raw SQL"
+    await db.commit()
+    return db
 
